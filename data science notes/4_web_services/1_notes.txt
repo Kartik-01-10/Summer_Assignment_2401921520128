@@ -1,0 +1,212 @@
+
+# -----------------------------------------------------
+
+# ✅ 1. What is an API?
+# ---------------------
+# API (Application Programming Interface) is a set of rules that allows one software
+# application to interact with another. It defines how requests and responses should be structured.
+
+# Example: A Python program using an API to get weather data
+import requests
+
+response = requests.get("https://api.weather.com/data")
+print(response.json())  # This uses the API to fetch weather info
+
+
+# 🌐 2. What is a Web API?
+# ------------------------
+# A Web API is a type of API that is accessible over the internet using HTTP/HTTPS.
+# It allows communication between client and server applications via web protocols.
+
+# Example: A browser or mobile app calling a Web API to fetch user data
+# GET https://api.example.com/users/123
+
+
+# 🔄 3. Difference Between API and Web API
+# ----------------------------------------
+
+# | Feature           | API                                  | Web API                                      |
+# |-------------------|---------------------------------------|-----------------------------------------------|
+# | Scope             | General (includes libraries, OS APIs) | Specific to web-based communication           |
+# | Protocol          | Can use any protocol                  | Uses HTTP/HTTPS                               |
+# | Data Format       | Binary, JSON, XML, etc.               | Mostly JSON or XML                            |
+# | Usage             | Local or remote                       | Always remote (via internet/intranet)         |
+# | Example           | Python `os` module                    | REST API for GitHub                           |
+
+
+# 🧱 4. REST and SOAP Architecture
+# --------------------------------
+
+# 🔹 REST (Representational State Transfer)
+# ----------------------------------------
+# REST is an architectural style for designing networked applications.
+# It uses HTTP methods (GET, POST, PUT, DELETE) and is stateless.
+
+# Key Features:
+# - Stateless: No session info stored on server
+# - Resource-based: URLs represent resources
+# - Uses JSON or XML
+# - Lightweight and fast
+# - it is simple flexible and have scalability
+# - It is easy to implement as compared to soap
+
+# Example RESTful API call:
+# GET https://api.example.com/products/101
+
+
+# 🔸 SOAP (Simple Object Access Protocol)
+# ---------------------------------------
+# SOAP is a protocol for exchanging structured XML data between systems.
+# It is more rigid and includes built-in error handling and security features.
+# It is more secure than rest 
+
+# Example SOAP Request (in XML):
+'''
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:web="http://webservice.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetProductDetails>
+         <web:ProductID>101</web:ProductID>
+      </web:GetProductDetails>
+   </soapenv:Body>
+</soapenv:Envelope>
+'''
+# 📘 What is XML?
+# ---------------
+# XML stands for **eXtensible Markup Language**.
+# It is a markup language used to store and transport data in a structured format.
+# XML is both human-readable and machine-readable.
+# It use wsdl and which support http, smtp, tcp 
+
+# ✅ Key Features of XML:
+# - Platform-independent: Works across different systems
+# - Self-descriptive: Tags describe the data
+# - Hierarchical structure: Data is nested in elements
+# - Extensible: You can define your own tags
+# - Commonly used in web services (especially SOAP)
+
+# 🔧 Example XML Document:
+'''
+<student id="101">
+    <name>Kartik</name>
+    <age>21</age>
+    <grade>A</grade>
+</student>
+'''
+
+# 🔍 Explanation:
+# - <student> is the root element
+# - id="101" is an attribute
+# - <name>, <age>, <grade> are child elements
+# - The structure is easy to parse and validate
+
+# 🛠️ Use Cases:
+# - Data exchange between systems
+# - Configuration files
+# - Web services (especially SOAP)
+# - RSS feeds, sitemap files, etc.
+
+# 🆚 XML vs HTML:
+# - XML is for carrying data (focus on what data is)
+# - HTML is for displaying data (focus on how data looks)
+
+# 📘 What is WSDL?
+# ----------------
+# WSDL stands for **Web Services Description Language**.
+# It is an XML-based language used to describe the functionality of a SOAP-based web service.
+
+# ✅ Purpose of WSDL:
+# - Describes what the web service does
+# - Specifies the location (URL) of the service
+# - Defines the operations (functions) available
+# - Lists input/output message formats and protocols
+
+# 🧱 Structure of a WSDL Document:
+# <definitions>     : Root element
+# <types>           : Data types used (XML Schema)
+# <message>         : Input/output data elements
+# <portType>        : Operations (like functions)
+# <binding>         : Protocol and data format (e.g., SOAP over HTTP)
+
+# 🔧 Example WSDL Fragment:
+'''
+<definitions name="CalculatorService">
+  <message name="AddRequest">
+    <part name="a" type="xsd:int"/>
+    <part name="b" type="xsd:int"/>
+  </message>
+  <message name="AddResponse">
+    <part name="result" type="xsd:int"/>
+  </message>
+  <portType name="CalculatorPortType">
+    <operation name="Add">
+      <input message="AddRequest"/>
+      <output message="AddResponse"/>
+    </operation>
+  </portType>
+</definitions>
+'''
+
+# 🛠️ How WSDL Works with SOAP:
+# - WSDL defines the operations (e.g., Add, Subtract)
+# - SOAP uses this definition to format requests and responses
+# - Client applications read the WSDL to understand how to interact with the service
+
+# 🌐 Summary:
+# - WSDL is essential for SOAP-based services
+# - It acts like a "contract" between client and server
+# - REST APIs do not use WSDL; they rely on documentation and HTTP standards
+
+# 🔗 Reference: W3Schools WSDL Guide
+# https://www.w3schools.com/XML/xml_wsdl.asp
+
+
+# 🌐 5. RESTful Services (Detailed Explanation)
+# ---------------------------------------------
+
+# RESTful services are web services built using REST architecture.
+# They expose resources via URLs and use standard HTTP methods.
+
+RESTful services, also known as RESTful APIs, are web services that follow the REST architectural style.
+REST stands for Representational State Transfer, which is a set of principles for building web services that use 
+HTTP (Hypertext Transfer Protocol) as the communication protocol.
+
+RESTful services are based on the following principles: 5 major properties
+
+1..Client-server architecture: The client and server are separated, allowing them to evolve independently.
+
+2..Stateless: Each request sent to the server contains all the information needed to complete the request.
+The server does not maintain any client context between requests.
+
+3..Cacheable: Responses from the server can be cached to improve performance.
+
+4..Uniform interface: RESTful services use a uniform interface consisting of resources, HTTP verbs (GET, POST, PUT, DELETE), and hypermedia links.
+
+5..Layered system: RESTful services can be composed of multiple layers, allowing for scalability, flexibility, and manageability.
+
+# HTTP Methods in REST:
+# - GET: Retrieve data
+# - POST: Create new data
+# - PUT: Update existing data
+# - DELETE: Remove data
+
+# Example RESTful Service Endpoints:
+# ----------------------------------
+# GET     /students           -> Fetch all students
+# GET     /students/101       -> Fetch student with ID 101
+# POST    /students           -> Add a new student
+# PUT     /students/101       -> Update student 101
+# DELETE  /students/101       -> Delete student 101
+
+# Sample Python code to consume a RESTful service:
+import requests
+
+# Fetch student data
+response = requests.get("https://api.school.com/students/101")
+print(response.json())
+
+# Add a new student
+new_student = {"name": "Kartik", "age": 21}
+response = requests.post("https://api.school.com/students", json=new_student)
+print(response.status_code)
