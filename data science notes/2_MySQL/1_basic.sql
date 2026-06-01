@@ -92,15 +92,24 @@ SELECT * FROM student ORDER BY marks DESC;          -- Sort rows by marks descen
 -- 9. WHERE, AND, OR, LIKE, IN – Filtering techniques
 SELECT * FROM student WHERE grade = 'A' AND marks > 90; -- Multiple conditions
 SELECT * FROM student WHERE full_name LIKE 'Kar%';      -- Name starts with 'Kar'
+
+select * from student where full_name like 'k%' and like 
+'%a' and not like 'y%'  -- we can use like one by one, not on all togther
+
 SELECT * FROM student WHERE id IN (1, 2);               -- Match multiple values
 
 -- 🔷 Aggregate Functions – Summary Calculations
 
 -- 10. COUNT, SUM, AVG, MIN, MAX – Aggregate operations
-SELECT COUNT(*) FROM student;                       -- Total number of rows
+SELECT COUNT(*) FROM student;            -- Total number of rows
+select full_name,COUNT(full_name) from student where count(full_name)=5;  -- classify acc to length of word 
+SELECT COUNT(DISTINCT grade) FROM student;  -- Count distinct grades
+                  
 SELECT SUM(marks) FROM student;                     -- Total marks
 SELECT AVG(marks) FROM student;                     -- Average marks
 SELECT MIN(marks), MAX(marks) FROM student;         -- Minimum and maximum marks
+
+select ROUND(AVG(marks),2) from student;            -- Rounding according to 2 decimal place 
 
 -- 11. GROUP BY, HAVING – Grouped summaries
 SELECT grade, COUNT(*) FROM student GROUP BY grade; -- Count students per grade
@@ -274,8 +283,10 @@ SELECT CURRENT_DATE + INTERVAL '7 days' AS next_week;
 
 -- 🔷 STRING FUNCTIONS – Manipulate Text
 
--- 15. Concatenate strings
+-- 15. Concatenate 
 SELECT CONCAT(full_name, ' - Grade: ', grade) AS summary FROM student;
+
+select concat(marks,'%') from student;
 
 -- 16. Convert to upper/lower case
 SELECT UPPER(full_name), LOWER(full_name) FROM student;

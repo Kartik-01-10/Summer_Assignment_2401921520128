@@ -3,5 +3,9 @@
         "*.dbclient-js": "javascript",
         "iostream": "cpp",
         "vector": "cpp"
-    }
+    },
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Program Files\\Microsoft\\jdk-17.0.18.8-hotspot\\bin;${env:PATH}"
+    },
+    "java.compile.nullAnalysis.mode": "automatic"
 }
